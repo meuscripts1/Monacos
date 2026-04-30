@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Script Search + Monaco</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/monaco-editor@0.45.0/min/vs/loader.js"></script>
+</head>
+
+<body>
+
+<div class="topbar">
+    <input id="searchBox" placeholder="Pesquisar scripts..." />
+    <button onclick="searchScripts()">Buscar</button>
+</div>
+
+<div class="container">
+    <div id="results"></div>
+    <div id="editor"></div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
