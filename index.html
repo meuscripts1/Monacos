@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <title>Script Hub</title>
     <link rel="stylesheet" href="style.css">
-
-    <script src="https://unpkg.com/monaco-editor@0.45.0/min/vs/loader.js"></script>
 </head>
 
 <body>
 
 <div class="topbar">
-    <input id="searchBox" placeholder="Pesquisar scripts..." />
+    <input id="searchBox" placeholder="🔍 Pesquisar scripts ou categoria..." />
     <button onclick="searchScripts()">Buscar</button>
 </div>
 
+<div id="category"></div>
 <div id="grid"></div>
 
 <script src="script.js"></script>
