@@ -1,48 +1,43 @@
-let editor;
+let scriptsData = [];
 
-// Monaco init
-require.config({ paths: { vs: "https://unpkg.com/monaco-editor@0.45.0/min/vs" }});
-
-require(["vs/editor/editor.main"], function () {
-    editor = monaco.editor.create(document.getElementById("editor"), {
-        value: "-- Script aqui",
-        language: "lua",
-        theme: "vs-dark",
-        automaticLayout: true
-    });
-});
-
-// Buscar scripts ScriptBlox
+// buscar API
 async function searchScripts() {
     let query = document.getElementById("searchBox").value;
 
     let res = await fetch(`https://scriptblox.com/api/script/search?q=${query}`);
     let data = await res.json();
 
-    let results = document.getElementById("results");
-    results.innerHTML = "";
+    scriptsData = data.result.slice(0, 20); // 🔥 só 20 scripts
+    renderCards();
+}
 
-    data.result.forEach(script => {
-        let div = document.createElement("div");
-        div.className = "script";
+// renderizar cards
+function renderCards() {
+    let grid = document.getElementById("grid");
+    grid.innerHTML = "";
 
-        div.innerHTML = `
-            <b>${script.title}</b><br><br>
-            <button onclick="loadScript(\`${encodeURIComponent(script.script)}\`)">Load</button>
-            <button onclick="copyScript(\`${encodeURIComponent(script.script)}\`)">Copy</button>
+    scriptsData.forEach(script => {
+        let card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+            <img src="${script.image || 'https://i.imgur.com/8QfQh9B.png'}" />
+            
+            <div class="card-content">
+                <b>${script.title}</b>
+
+                <button onclick="copyScript(\`${encodeURIComponent(script.script)}\`)">
+                    Copy Script
+                </button>
+            </div>
         `;
 
-        results.appendChild(div);
+        grid.appendChild(card);
     });
 }
 
-// Carregar no Monaco
-function loadScript(code) {
-    editor.setValue(decodeURIComponent(code));
-}
-
-// Copiar script
+// copiar script
 function copyScript(code) {
     navigator.clipboard.writeText(decodeURIComponent(code));
-    alert("Copiado!");
+    alert("Script copiado!");
 }
