@@ -1,48 +1,73 @@
 body {
     margin: 0;
     font-family: Arial;
-    background: #1e1e1e;
+    background: #1b1b1b;
     color: white;
 }
 
+/* top bar */
 .topbar {
+    display: flex;
     padding: 10px;
     background: #111;
-    display: flex;
     gap: 10px;
 }
 
 #searchBox {
     flex: 1;
     padding: 8px;
-    border: none;
-    outline: none;
 }
 
-button {
-    padding: 8px 12px;
-    cursor: pointer;
+/* GRID 20 caixas */
+#grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    padding: 15px;
 }
 
-.container {
-    display: flex;
-    height: calc(100vh - 50px);
-}
-
-#results {
-    width: 300px;
-    overflow-y: auto;
-    background: #151515;
-    padding: 10px;
-}
-
-.script {
+/* CARD */
+.card {
+    position: relative;
     background: #222;
-    margin-bottom: 10px;
-    padding: 8px;
-    border-radius: 5px;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 200px;
+    box-shadow: 0 0 10px #000;
 }
 
-#editor {
-    flex: 1;
+/* papel atrás */
+.card::before {
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: url("https://i.imgur.com/8QfQh9B.png"); /* papel fundo */
+    opacity: 0.08;
+    transform: rotate(10deg);
+}
+
+/* imagem do script */
+.card img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+}
+
+/* conteúdo */
+.card-content {
+    padding: 8px;
+    position: relative;
+    z-index: 2;
+}
+
+/* botão */
+button {
+    width: 100%;
+    padding: 6px;
+    background: #00aaff;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-top: 5px;
 }
